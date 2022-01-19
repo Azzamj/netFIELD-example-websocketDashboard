@@ -94,6 +94,8 @@ class dashboard(config):
                     dbc.Input(id = 'email'),
                     dbc.Label('Password',className = 'margin_label_top'),
                     dbc.Input(id = 'password',type = "password"),
+                    dbc.Label('Orgenization ID',className = 'margin_label_top'),
+                    dbc.Input(id = 'org_id'),
                     dbc.Label('API Endpoint',className = 'margin_label_top'),
                     dcc.Dropdown(id = 'api-endpoint', options = [
                         {'label' : 'training', 'value' : 'api-training'},
@@ -173,7 +175,7 @@ class dashboard(config):
             Output('page1','hidden'),
             Output('page2', 'hidden'),
             Input('id_1','n_clicks'),
-            Input('id_2', 'n_clicks')
+            Input('id_2', 'n_clicks'),
             )
         def toggle(_,__):
             ctx = dash.callback_context
@@ -183,6 +185,7 @@ class dashboard(config):
             
             elif 'id_2' in ctx.triggered[0]['prop_id']:
                 self.store.chart_position = 45
+                
                 return page1, not page2
             
             else:
@@ -210,14 +213,16 @@ class dashboard(config):
                 State('email','value'),
                 State('password','value'),
                 State('apikey','value'),
-                State('page1','children')
+                State('page1','children'),
+                State('org_id', 'value')
             ]
         )
-        def verify_mailpassword(_, email, password, apikey, children):
+        def verify_mailpassword(_, email, password, apikey, children, org_id):
             #check user input and update config file
             if email and password:
                 self.config_file['email'] = email
                 self.config_file['password'] = password
+                self.config_file['organisationId'] = org_id
                 self.update_config()#save the scope to a configuration file for next sessions
                 self.ws = asyncio.run(NetFieldWebSocket.from_email())
             
@@ -225,7 +230,6 @@ class dashboard(config):
                 self.config_file['accessToken'] = apikey
                 self.update_config()
                 self.ws = NetFieldWebSocket()
-                verify_user = asyncio.run(self.ws.verify_token)
             
             #Fallback to configuration file
             else:
@@ -329,7 +333,10 @@ class dashboard(config):
                     self.store.data_flag = False
                     if not topic or not id:
                         logging.info('device Id or topic is missing....')
-                        return dash.no_update                        
+                        return dash.no_update
+                    self.config_file['message-topic'] = topic
+                    self.config_file['device'] = id
+                    self.update_config()                      
                     sub = threading.Thread(target=data_collector, args=(id, topic))
                     sub.start()
                 except Exception as ex:
