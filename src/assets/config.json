@@ -1,0 +1,9 @@
+{
+    "email": "your email",
+    "password": "your secret password",
+    "organisationId": "",
+    "BASE_API_ENDPOINT": "wss://api.netfield.io/v1",
+    "accessToken": "",
+    "device": "",
+    "message-topic": ""
+}

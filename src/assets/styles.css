@@ -1,0 +1,89 @@
+.Logo{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 200px;
+    height: 120px;
+}
+
+.Logo img{
+    width: 100%;
+    height: auto;
+}
+
+.user_form_container{
+    position: absolute;
+    top: 10%;
+    left: 40%;
+    width: 500px;
+}
+
+.user_form_container_left{
+    position: absolute;
+    top: 10%;
+    left: 40%;
+    width: 500px;
+    transition-duration: 1s;
+    transform: translateX(-80%);
+}
+
+.device_form_container{
+    position: absolute;
+    top: 10%;
+    left: 40%;
+    width: 500px;
+}
+
+
+.verify_button{
+    margin-top: 10px;
+    margin-left: 30%;
+    width: 150px;
+    background-color: green;
+    border-color: green;
+}
+
+.margin_label_top{
+    margin-top: 10px;
+}
+
+.alet-bar{
+    position: fixed;
+    top: 0%;
+    left: 10%;
+    width: 70%;
+}
+
+.add_chart_btn{
+    position: absolute;
+    top: 1%;
+    left : 50%;
+}
+
+.create_chart_btn{
+    position: absolute;
+    top: 65%;
+    left: 45%;
+}
+
+
+.button {
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #f4511e;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 28px;
+    padding: 20px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.first_chart{
+    position: absolute;
+    right: -200%;
+    width: 1000px;
+}
