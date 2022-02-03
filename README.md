@@ -9,13 +9,10 @@ using the dash framework.
 pip install -r requirments.txt
 ```
 
-### Executing program
+### Run it
 ```
 python app.py
 ```
-## Version History
-* 0.1
-* Initial Release
 ## License
 This project is licensed under the MIT License - see the LICENSE.md file for details
 
